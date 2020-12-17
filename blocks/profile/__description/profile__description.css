@@ -1,0 +1,8 @@
+.profile__description{
+    border:1px solid red;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 18px;
+    color: #FFFFFF;
+    margin: 0;
+}

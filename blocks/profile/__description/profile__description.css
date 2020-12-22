@@ -1,8 +1,18 @@
 .profile__description{
-    border:1px solid red;
     font-weight: normal;
     font-size: 18px;
     line-height: 18px;
     color: #FFFFFF;
     margin: 0;
+    max-width: 336px;
+    
+}
+@media screen and (max-width:320px){
+    .profile__description{
+        max-width:282px;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        margin:0 auto;
+    }
 }

@@ -3,7 +3,6 @@
     height: 50px;
     background-color: #000000;
     color:#FFFFFF;
-    font-family: Inter;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -11,9 +10,10 @@
     text-align: center;
     padding: 0%;
     border-radius: 2px;
-    margin:18px 36px 37px 36px;
+    margin:48px 36px 37px 36px;
     box-sizing: border-box;
     cursor: pointer;
+    transition: 0.3s;
 }
 .popup__safety:hover{
     opacity: 0.8;
@@ -30,6 +30,6 @@
 @media screen and (max-width:425px){
     .popup__safety{
         width:238px;
-        margin: 15px 22px 25px 22px;
+        margin: 45px 22px 25px 22px;
     }
 }

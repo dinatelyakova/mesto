@@ -13,77 +13,77 @@
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар">
-                <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit"></button>
-                    <p class="profile__description">Исследователь океана</p>    
+                <div class="profile__content-box">
+                    <img class="profile__avatar" src="./images/Avatar.png" alt="Аватар">
+                    <div class="profile__info">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit" type="button"></button>
+                        <p class="profile__description">Исследователь океана</p>    
+                    </div>
                 </div>
-                <button class="profile__add"></button>
+                <button class="profile__add" type="button"></button>
             </section>
             <section class="elements">
                 <div class="element">
                     <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
                     <div class="element__name-box">
                         <h2 class="element__title">Карачаевск</h2>
-                        <img class="element__like" src="./images/Group.svg" alt="Нравится">
+                        <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/philipp-trubchenko-fNiZMaX-Gc8-unsplash.jpg" alt="Байкал">
                     <div class="element__name-box">
                         <h2 class="element__title">Байкал</h2>
-                        <img class="element__like" src="./images/Group.svg" alt="Нравится">
+                        <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/igor-talanov-pmbScdjOOkY-unsplash.jpg" alt="Санкт-Петербург">
                     <div class="element__name-box">
                         <h2 class="element__title">Санкт-Петербург</h2>
-                        <img class="element__like" src="./images/Group.svg" alt="Нравится">
+                        <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/angelica-sabina-j53--Wmum9Y-unsplash.jpg" alt="Роза Хутор">
                     <div class="element__name-box">
                         <h2 class="element__title">Роза Хутор</h2>
-                        <img class="element__like" src="./images/Group.svg" alt="Нравится">
+                        <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/daniil-silantev-WaRAHxoBVIo-unsplash.jpg" alt="Камчатка">
                     <div class="element__name-box">
                         <h2 class="element__title">Камчатка</h2>
-                        <img class="element__like" src="./images/Group.svg" alt="Нравится">
+                        <button class="element__like" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="./images/daniel-born-pikbdiJetk8-unsplash.jpg" alt="Эльбрус">
                     <div class="element__name-box">
                         <h2 class="element__title">Эльбрус</h2>
-                        <img class="element__like" src="./images/Group.svg" alt="Нравится">
+                        <button class="element__like" type="button"></button>
                     </div>
                 </div>
             </section>
+        </main>
             <footer class="footer">
                 <p class="footer__inscription" lang="en">&copy; 2020 Mesto Russia</p>
             </footer>
             <section class="popup popup_disabled">
                 <div class="popup__container">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__form"> 
+                    <form class="popup__form" name="information"> 
                         <fieldset class="popup__input-container">
-                            <input type="text"  class="popup__text popup__text_type_name" value="Жак-Ив Кусто">
-                        </fieldset>
-                        <fieldset class="popup__input-container">
-                            <input type="text" class="popup__text popup__text_type_descripion" value="Исследователь океана">
+                            <input type="text"  name="name" class="popup__text popup__text_type_name"  placeholder="Имя" value="Жак-Ив Кусто">
+                            <input type="text" name="description" class="popup__text popup__text_type_descripion" placeholder="О себе" value="Исследователь океана">
                         </fieldset>
                         <button class="popup__safety" type="submit">Сохранить</button>
                     </form>
-                    <span class="popup__close"></span>
+                    <button type="button" class="popup__close"></button>
                 </div>
             </section>
-        </main>
     </div>
     <script src="./script/index.js"></script>
 </body>

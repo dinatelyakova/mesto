@@ -3,7 +3,14 @@
     margin-bottom:50px;
     display:flex;
     max-width:880px;
+    justify-content: space-between;
 }
+@media screen and (max-width:900px){
+    .profile{
+        max-width:720px;
+    }
+}
+
 @media screen and (max-width:768px){
     .profile{
         display: block;

@@ -1,6 +1,18 @@
 .element__like{
-    cursor: pointer; 
+    background-color: #FFFFFF;
+    background: url('../../../images/Group.svg') center no-repeat;
+    width:21px;
+    height: 19px;
+    cursor: pointer;
+    background-size: 100%;
+    border:none;
+    transition: 0.3s;
 }
 .element__like:hover{
     opacity: 0.5;
+    transform: scale(1.3);
+}
+.element__like:active{
+    opacity: 1;
+    background: url('../../../images/Union.svg') center no-repeat;
 }

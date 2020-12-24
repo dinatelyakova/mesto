@@ -1,0 +1,15 @@
+.profile__content-box{
+    border:1px solid red;
+    display: flex;
+    max-width: 486px;
+}
+@media screen and (max-width:568px){
+    .profile__content-box{
+        display: block;
+    }
+}
+@media screen and (max-width:425px){
+    .profile__content-box{
+        display: block;
+    }
+}

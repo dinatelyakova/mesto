@@ -11,6 +11,7 @@
     background-position: 50% 50%;
     margin:35px 0 35px 0;
     cursor: pointer;
+    transition: 0.3s;
 }
 .profile__add:hover{
     opacity: 0.6;

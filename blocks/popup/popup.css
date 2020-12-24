@@ -7,22 +7,5 @@
     left:0;
     display: flex;
     justify-content: center;
-    padding-top:195px;
-    padding-left:425px;
-    padding-right:425px;
-    align-items: flex-start;
-}
-@media screen and (max-width:768px){
-    .popup{
-        padding-top:100px;
-        padding-right:50px;
-        padding-left:50px;
-    }
-}
-@media screen and (max-width:425px){
-    .popup{
-        padding-top:123px;
-        padding-right:19px;
-        padding-left:19px;
-    }
+    align-items: center;
 }

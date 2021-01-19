@@ -1,0 +1,13 @@
+.popup__form-image{
+    width:430px;
+}
+@media screen and (max-width:768px){
+    .popup__form-image{
+        width:350px;
+    }
+}
+@media screen and (max-width:425px){
+    .popup__form-image{
+        width:282px;
+    }
+}

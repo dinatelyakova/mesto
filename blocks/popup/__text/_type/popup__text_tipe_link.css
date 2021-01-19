@@ -1,0 +1,6 @@
+.popup__text_type_link{
+
+}
+.popup__text_type_link::placeholder{
+    color:#C4C4C4;
+}

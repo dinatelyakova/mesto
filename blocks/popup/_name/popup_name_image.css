@@ -1,4 +1,4 @@
-.popup{
+.popup_name_image{
     position:fixed;
     background: rgba(0, 0, 0, .5);
     top:0;
@@ -7,8 +7,12 @@
     left:0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    transition: visibility 0.5s, opacity 0.3s linear;
-    visibility: hidden;
-    opacity: 0; 
+    padding-top:90px;
+    
+       
+}
+@media screen and (max-width:425px){
+    .popup_name_image{
+        padding-top:136px;
+    }
 }

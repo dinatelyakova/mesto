@@ -1,0 +1,26 @@
+.popup__close_name_place{
+border:none;
+position:absolute;
+background: url('../../../../images/Close_Icon.svg');
+background-repeat: no-repeat;
+height: 40px;
+width:40px;
+box-sizing: border-box;
+background-position: center;
+background-size:cover;
+top:-40px;
+right:-40px;
+cursor: pointer;
+transition: 0.3s;
+}
+.popup__close_name_place:hover{
+opacity: 0.6;
+}
+@media screen and (max-width:768px){
+.popup__close_name_place{
+    height: 26px;
+    width:26px;
+    right: 5px;
+    
+}
+}

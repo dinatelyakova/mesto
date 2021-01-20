@@ -22,6 +22,9 @@ const imageCloseButton = document.querySelector('.popup__close_name_image');
 const bigImage = document.querySelector('.popup__image');
 const bigTitle = document.querySelector('.popup__image-title');
 const formImageElement= document.querySelector('.popup__form-image');
+const title =  document.querySelector('.popup__text_type_title');
+const image = document.querySelector('.popup__text_type_link');
+const namePopup = document.querySelector('.popup_name_info');
 
 const initialCards = [
     {
@@ -51,15 +54,9 @@ const initialCards = [
 ];
 //отображение темплейтов на странице
 initialCards.forEach(function(item){
-    const placeElement = elementTemplate.cloneNode(true);
-    placeElement.querySelector('.element__image').src = item.link;
-    placeElement.querySelector('.element__title').textContent = item.name;
-    placeElement.querySelector('.element__image').addEventListener('click', () => increaseImage(item.link, item.name));
-    placeElement.querySelector('.element__delete').addEventListener('click', handlDelete);
-    placeElement.querySelector('.element__like').addEventListener('click', likeElement);
-    elementGrid.prepend(placeElement);
-    
+    elementGrid.prepend(createCard(item.link, item.name));
 });
+
 //создание новой картинки
 function createCard(link = 'http://probablyprogramming.com/wp-content/uploads/2009/03/tinytrans.gif', name='Место в России') {
     const placeElement = elementTemplate.cloneNode(true);
@@ -69,8 +66,16 @@ function createCard(link = 'http://probablyprogramming.com/wp-content/uploads/20
     placeElement.querySelector('.element__like').addEventListener('click', likeElement);
     placeElement.querySelector('.element__image').addEventListener('click', () => increaseImage(link, name)); 
     elementGrid.prepend(placeElement);
+    return placeElement;
  };
-
+// открытие попапов
+ function openModal(popup){
+    popup.classList.add('popup_active');
+ }
+//закрытие попапов
+ function closeModal(popup){
+    popup.classList.remove('popup_active');
+ }
  //лайки
 function likeElement(evt){
     evt.target.classList.toggle('element__like_active');
@@ -82,16 +87,15 @@ function handlDelete(evt) {
 };
 //кнопка добавления картинки
 createButton.addEventListener('click', function(){
-    const title =  document.querySelector('.popup__text_type_title');
-    const image = document.querySelector('.popup__text_type_link');
     createCard(image.value, title.value);
     title.value = title.placeholder;
     image.value = image.placeholder;
+    closeModal(placePopup);
 });
 
 // попап с редактированием имени
-function openPopup(){
-    popup.classList.add('popup_active');
+function openPopupName(){
+    openModal(namePopup);
     nameInput.textContent = nameProfile.value;
     descriptionInput.textContent = descriptionProfile.value;
 };
@@ -103,25 +107,12 @@ function handleFormSubmit (evt) {
     descriptionProfile.textContent = descriptionInput.value;   
 };
 
-//закрытие попапа редактирования имени
-function closePopup(){
-    popup.classList.remove('popup_active');
-};
-
-//открытие попапа для добавления картинки
-addButton.addEventListener('click', function(){
-    placePopup.classList.add('popup_active');
-    
-});
 //отправка картинки
 function handleSubmit(evt){
     evt.preventDefault();
     placeElement.src = linkInput.value;
     placeElement.textContent = titleInput.value;
-};
-// закрытие попапа с добавлением картинки
-function closeImagePopup(){
-    placePopup.classList.remove('popup_active');
+    
 };
 
 //занесение данных в попап с картинкой
@@ -129,24 +120,14 @@ function increaseImage(link, name){
         bigImage.src = link;
         bigTitle.textContent = name;
         bigImage.alt = name;
-        openImage(imagePopup);
+        openModal(imagePopup);
     }
     
-//функция закрытия картинки
-
-imageCloseButton.addEventListener('click', function(){
-    imagePopup.classList.remove('popup_active');
-});
-
-// открытие попапа с картинкой
-function openImage(imagePopup){
-    imagePopup.classList.add('popup_active');
-}
-
+addButton.addEventListener('click', () => openModal(placePopup));
+imageCloseButton.addEventListener('click', () => closeModal(imagePopup));
 formImageElement.addEventListener('submit', handleSubmit);
-createButton.addEventListener('click', closeImagePopup);
 formElement.addEventListener('submit', handleFormSubmit);
-saveButton.addEventListener('click', closePopup);
-closeButton.addEventListener('click', closePopup);
-editButton.addEventListener('click', openPopup);
-placeCloseButton.addEventListener('click', closeImagePopup);
+saveButton.addEventListener('click', ()=> closeModal(namePopup));
+closeButton.addEventListener('click', ()=> closeModal(namePopup));
+editButton.addEventListener('click', openPopupName);
+placeCloseButton.addEventListener('click',() => closeModal(placePopup));

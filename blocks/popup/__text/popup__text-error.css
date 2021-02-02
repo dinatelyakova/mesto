@@ -8,9 +8,9 @@
     position:absolute;
     font-size: 12px;
     left:0;
-    top: 31px;
+    top: 35px;
     transition: 0.3s;
 }
 .popup__text-error:last-of-type{
-    top:92px;
+    top:96px;
 }

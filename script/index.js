@@ -2,12 +2,12 @@ const editButton = document.querySelector('.profile__edit');
 const popup = document.querySelector('.popup');
 const closeButton = popup.querySelector('.popup__close');
 const formElement = document.querySelector('.popup__form');
-const saveButton = popup.querySelector('.popup__safety');
+const saveButton = popup.querySelector('.popup__submit');
 const nameInput = document.querySelector('.popup__text_type_name');
-const descriptionInput = document.querySelector('.popup__text_type_descripion');
+const descriptionInput = document.querySelector('.popup__text_type_description');
 const descriptionProfile = document.querySelector('.profile__description');
 const nameProfile = document.querySelector('.profile__name');
-const createButton = document.querySelector('.popup__create');
+const createButton = document.querySelector('.button');
 const titleInput = document.querySelector('.popup__text_type_title');
 const linkInput = document.querySelector('.popup__text_type_link');
 const deleteButton = document.querySelector('.element__delete');
@@ -54,7 +54,7 @@ const initialCards = [
 ];
 //отображение темплейтов на странице
 initialCards.forEach(function(item){
-    elementGrid.prepend(createCard(item.link, item.name));
+    createCard(item.link, item.name);
 });
 
 //создание новой картинки
@@ -85,6 +85,7 @@ function likeElement(evt){
 function handlDelete(evt) {
     evt.target.closest('.element').remove();
 };
+
 //кнопка добавления картинки
 createButton.addEventListener('click', function(){
     createCard(image.value, title.value);
@@ -109,10 +110,10 @@ function handleFormSubmit (evt) {
 
 //отправка картинки
 function handleSubmit(evt){
+    const placeElement = elementTemplate.cloneNode(true);
     evt.preventDefault();
     placeElement.src = linkInput.value;
-    placeElement.textContent = titleInput.value;
-    
+    placeElement.textContent = titleInput.value;    
 };
 
 //занесение данных в попап с картинкой
@@ -121,8 +122,29 @@ function increaseImage(link, name){
         bigTitle.textContent = name;
         bigImage.alt = name;
         openModal(imagePopup);
+    };
+// закрытие попапов нажатием по оверлэю 
+function closeOverlay(event){
+    if (event.target === event.currentTarget){
+        closeModal(popup);
+        closeModal(placePopup);
+        closeModal(imagePopup);
     }
-    
+};
+placePopup.addEventListener('click', closeOverlay);
+imagePopup.addEventListener('click', closeOverlay);
+popup.addEventListener('click', closeOverlay);
+
+
+document.body.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+        closeModal(popup);
+        closeModal(placePopup);
+        closeModal(imagePopup);   
+    }
+});
+
+
 addButton.addEventListener('click', () => openModal(placePopup));
 imageCloseButton.addEventListener('click', () => closeModal(imagePopup));
 formImageElement.addEventListener('submit', handleSubmit);

@@ -8,11 +8,14 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
-    padding-bottom:13px;
+    padding-bottom:13px; 
+    margin-top: 0;
+    margin-bottom: 30px;
 }
-.popup__text:first-child{
-    margin-bottom:30px;
+.popup__text:last-of-type{
+    margin-bottom: 0px;
 }
+
 .popup__text::-webkit-input-placeholder{
     color: #000000;
 }

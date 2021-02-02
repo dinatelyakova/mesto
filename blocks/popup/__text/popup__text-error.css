@@ -1,0 +1,16 @@
+.popup__text-error{
+    opacity: 0;
+    color:#FF0000;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    position:absolute;
+    font-size: 12px;
+    left:0;
+    top: 31px;
+    transition: 0.3s;
+}
+.popup__text-error:last-of-type{
+    top:92px;
+}

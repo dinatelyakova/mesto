@@ -140,7 +140,7 @@ function closeByEscape(evt) {
     }
   }
 
-document.addEventListener('keydown', closeByEscape);
+
 addButton.addEventListener('click', () => openModal(placePopup));
 formImageElement.addEventListener('submit', handleSubmit);
 formElement.addEventListener('submit', handleFormSubmit);

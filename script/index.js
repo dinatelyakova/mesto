@@ -1,8 +1,8 @@
 const editButton = document.querySelector('.profile__edit');
-const popup = document.querySelector('.popup');
-const closeButton = popup.querySelector('.popup__close');
+const popups = document.querySelectorAll('.popup');
+const closeButton = document.querySelector('.popup__close');
 const formElement = document.querySelector('.popup__form');
-const saveButton = popup.querySelector('.popup__submit');
+const saveButton = document.querySelector('.popup__submit');
 const nameInput = document.querySelector('.popup__text_type_name');
 const descriptionInput = document.querySelector('.popup__text_type_description');
 const descriptionProfile = document.querySelector('.profile__description');
@@ -54,27 +54,31 @@ const initialCards = [
 ];
 //отображение темплейтов на странице
 initialCards.forEach(function(item){
-    createCard(item.link, item.name);
+    const placeElement =  createCard(item.link, item.name);
+    elementGrid.prepend(placeElement);
 });
 
 //создание новой картинки
 function createCard(link = 'http://probablyprogramming.com/wp-content/uploads/2009/03/tinytrans.gif', name='Место в России') {
     const placeElement = elementTemplate.cloneNode(true);
-    placeElement.querySelector('.element__image').src = link;
+    const imageElement= placeElement.querySelector('.element__image');
+    imageElement.src = link;
+    imageElement.alt = name;
     placeElement.querySelector('.element__title').textContent = name;
     placeElement.querySelector('.element__delete').addEventListener('click', handlDelete);
     placeElement.querySelector('.element__like').addEventListener('click', likeElement);
-    placeElement.querySelector('.element__image').addEventListener('click', () => increaseImage(link, name)); 
-    elementGrid.prepend(placeElement);
+    imageElement.addEventListener('click', () => increaseImage(link, name));
     return placeElement;
  };
 // открытие попапов
  function openModal(popup){
     popup.classList.add('popup_active');
+    document.addEventListener('keydown', closeByEscape);
  }
 //закрытие попапов
  function closeModal(popup){
     popup.classList.remove('popup_active');
+    document.removeEventListener('keydown', closeByEscape);
  }
  //лайки
 function likeElement(evt){
@@ -85,14 +89,6 @@ function likeElement(evt){
 function handlDelete(evt) {
     evt.target.closest('.element').remove();
 };
-
-//кнопка добавления картинки
-createButton.addEventListener('click', function(){
-    createCard(image.value, title.value);
-    title.value = title.placeholder;
-    image.value = image.placeholder;
-    closeModal(placePopup);
-});
 
 // попап с редактированием имени
 function openPopupName(){
@@ -105,15 +101,17 @@ function openPopupName(){
 function handleFormSubmit (evt) {
     evt.preventDefault();
     nameProfile.textContent = nameInput.value;
-    descriptionProfile.textContent = descriptionInput.value;   
+    descriptionProfile.textContent = descriptionInput.value;
+    closeModal(namePopup) 
 };
 
 //отправка картинки
 function handleSubmit(evt){
-    const placeElement = elementTemplate.cloneNode(true);
-    evt.preventDefault();
-    placeElement.src = linkInput.value;
-    placeElement.textContent = titleInput.value;    
+    const placeElement = createCard(image.value, title.value);
+    elementGrid.prepend(placeElement);
+    title.value = '';
+    image.value = '';
+    closeModal(placePopup); 
 };
 
 //занесение данных в попап с картинкой
@@ -124,32 +122,26 @@ function increaseImage(link, name){
         openModal(imagePopup);
     };
 // закрытие попапов нажатием по оверлэю 
-function closeOverlay(event){
-    if (event.target === event.currentTarget){
-        closeModal(popup);
-        closeModal(placePopup);
-        closeModal(imagePopup);
-    }
-};
-placePopup.addEventListener('click', closeOverlay);
-imagePopup.addEventListener('click', closeOverlay);
-popup.addEventListener('click', closeOverlay);
-
-
-document.body.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
-        closeModal(popup);
-        closeModal(placePopup);
-        closeModal(imagePopup);   
-    }
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_active')) {
+            closeModal(popup);
+        }
+        if (evt.target.classList.contains('popup__close')) {
+            closeModal(popup);
+        }
+    })
 });
 
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_active');
+      closeModal(openedPopup);
+    }
+  }
 
+document.addEventListener('keydown', closeByEscape);
 addButton.addEventListener('click', () => openModal(placePopup));
-imageCloseButton.addEventListener('click', () => closeModal(imagePopup));
 formImageElement.addEventListener('submit', handleSubmit);
 formElement.addEventListener('submit', handleFormSubmit);
-saveButton.addEventListener('click', ()=> closeModal(namePopup));
-closeButton.addEventListener('click', ()=> closeModal(namePopup));
 editButton.addEventListener('click', openPopupName);
-placeCloseButton.addEventListener('click',() => closeModal(placePopup));

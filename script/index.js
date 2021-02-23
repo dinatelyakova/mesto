@@ -1,7 +1,11 @@
+
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const editButton = document.querySelector('.profile__edit');
 const popups = document.querySelectorAll('.popup');
 const closeButton = document.querySelector('.popup__close');
-const formElement = document.querySelector('.popup__form');
+const formInfoElement = document.querySelector('.popup__form-info');
 const saveButton = document.querySelector('.popup__submit');
 const nameInput = document.querySelector('.popup__text_type_name');
 const descriptionInput = document.querySelector('.popup__text_type_description');
@@ -16,7 +20,6 @@ const placePopup = document.querySelector('.popup_name_place');
 const placeCloseButton = document.querySelector('.popup__close_name_place');
 const placeLike = document.querySelector('element__like');
 const elementGrid = document.querySelector('.elements');
-const elementTemplate = document.querySelector('.element-template').content;
 const imagePopup = document.querySelector('.popup_name_image');
 const imageCloseButton = document.querySelector('.popup__close_name_image');
 const bigImage = document.querySelector('.popup__image');
@@ -52,24 +55,40 @@ const initialCards = [
     link:'https://images.unsplash.com/photo-1501675423372-9bfa95849e62?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80'
     },
 ];
-//отображение темплейтов на странице
+
+const validationObj = {
+    formSelector: '.popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__submit',
+  activeButtonClass: 'popup__submit',
+  inactiveButtonClass: 'button_inactive',
+  inputErrorClass: 'popup__text-line',
+  errorClass: 'popup__text-error_active'
+};
+
+const formValidatorInfo = new FormValidator(validationObj, formInfoElement);
+formValidatorInfo.enableValidation();
+
+const formValidatorPlace = new FormValidator(validationObj, formImageElement);
+formValidatorPlace.enableValidation();
+
+
+
+
+// отображение темплейтов на странице
 initialCards.forEach(function(item){
-    const placeElement =  createCard(item.link, item.name);
+    const placeElement =  createCard(item);
     elementGrid.prepend(placeElement);
 });
 
-//создание новой картинки
-function createCard(link = 'http://probablyprogramming.com/wp-content/uploads/2009/03/tinytrans.gif', name='Место в России') {
-    const placeElement = elementTemplate.cloneNode(true);
-    const imageElement= placeElement.querySelector('.element__image');
-    imageElement.src = link;
-    imageElement.alt = name;
-    placeElement.querySelector('.element__title').textContent = name;
-    placeElement.querySelector('.element__delete').addEventListener('click', handlDelete);
-    placeElement.querySelector('.element__like').addEventListener('click', likeElement);
-    imageElement.addEventListener('click', () => increaseImage(link, name));
-    return placeElement;
- };
+
+
+function createCard(data){
+    const card = new Card(data, '.element-template');
+    const cardElement = card.render();
+    return cardElement;
+}
+
 // открытие попапов
  function openModal(popup){
     popup.classList.add('popup_active');
@@ -80,49 +99,13 @@ function createCard(link = 'http://probablyprogramming.com/wp-content/uploads/20
     popup.classList.remove('popup_active');
     document.removeEventListener('keydown', closeByEscape);
  }
- //лайки
-function likeElement(evt){
-    evt.target.classList.toggle('element__like_active');
-}
-
- // кнопка удаления картинки
-function handlDelete(evt) {
-    evt.target.closest('.element').remove();
-};
-
-// попап с редактированием имени
-function openPopupName(){
-    openModal(namePopup);
-    nameInput.textContent = nameProfile.value;
-    descriptionInput.textContent = descriptionProfile.value;
-};
-
-// отправка имени
-function handleFormSubmit (evt) {
-    evt.preventDefault();
-    nameProfile.textContent = nameInput.value;
-    descriptionProfile.textContent = descriptionInput.value;
-    closeModal(namePopup) 
-};
-
-//отправка картинки
-function handleSubmit(evt){
-    const placeElement = createCard(image.value, title.value);
-    elementGrid.prepend(placeElement);
-    title.value = '';
-    image.value = '';
-    closeModal(placePopup); 
-};
-
-//занесение данных в попап с картинкой
-function increaseImage(link, name){
-        bigImage.src = link;
-        bigTitle.textContent = name;
-        bigImage.alt = name;
-        openModal(imagePopup);
-    };
-// закрытие попапов нажатием по оверлэю 
-popups.forEach((popup) => {
+ function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_active');
+      closeModal(openedPopup);
+    }
+  }
+  popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('popup_active')) {
             closeModal(popup);
@@ -132,16 +115,33 @@ popups.forEach((popup) => {
         }
     })
 });
+function openPopupName(){
+    openModal(namePopup);
+    nameInput.textContent = nameProfile.value;
+    descriptionInput.textContent = descriptionProfile.value;
+};
+// отправка имени
+function handleFormSubmit (evt) {
+    evt.preventDefault();
+    nameProfile.textContent = nameInput.value;
+    descriptionProfile.textContent = descriptionInput.value;
+    closeModal(namePopup) 
+};
 
-function closeByEscape(evt) {
-    if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_active');
-      closeModal(openedPopup);
-    }
-  }
-
+// //отправка картинки
+function handleSubmit(evt){
+    evt.preventDefault();
+    const placeElement = createCard({ name:title.value, link:image.value});
+    elementGrid.prepend(placeElement);
+    title.value = '';
+    image.value = '';
+    closeModal(placePopup); 
+};
 
 addButton.addEventListener('click', () => openModal(placePopup));
 formImageElement.addEventListener('submit', handleSubmit);
-formElement.addEventListener('submit', handleFormSubmit);
+formInfoElement.addEventListener('submit', handleFormSubmit);
 editButton.addEventListener('click', openPopupName);
+
+
+export {openModal, closeModal, imagePopup, bigImage, bigTitle};

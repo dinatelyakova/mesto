@@ -116,10 +116,10 @@ function createCard(data){
     })
 });
 function openPopupName(){
-    openModal(namePopup);
     nameInput.textContent = nameProfile.value;
     descriptionInput.textContent = descriptionProfile.value;
     formValidatorInfo.resetValidation();
+    openModal(namePopup);
 };
 // отправка имени
 function handleFormSubmit (evt) {

@@ -15,6 +15,11 @@ class FormValidator{
     enableValidation() {
         this._setEventListeners();
       };
+    resetValidation(){
+        this._inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement)
+        });
+      }
 
     _setEventListeners(){
         this._toggleButtonState(this._inputList, this._buttonElement);
@@ -41,8 +46,8 @@ class FormValidator{
         errorElement.classList.add(this._errorClass);
       };
 
-      _hideInputError (formElement, inputElement){
-        const errorElement = formElement.document.querySelector(`.${inputElement.id}-error`);
+      _hideInputError (inputElement){
+        const errorElement = document.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.remove(this._inputErrorClass);
         errorElement.textContent = '';
         errorElement.classList.remove(this._errorClass);

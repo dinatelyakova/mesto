@@ -119,6 +119,7 @@ function openPopupName(){
     openModal(namePopup);
     nameInput.textContent = nameProfile.value;
     descriptionInput.textContent = descriptionProfile.value;
+    formValidatorInfo.resetValidation();
 };
 // отправка имени
 function handleFormSubmit (evt) {
@@ -138,7 +139,11 @@ function handleSubmit(evt){
     closeModal(placePopup); 
 };
 
-addButton.addEventListener('click', () => openModal(placePopup));
+addButton.addEventListener('click', () => {
+    formValidatorPlace.resetValidation()
+    openModal(placePopup)
+});
+
 formImageElement.addEventListener('submit', handleSubmit);
 formInfoElement.addEventListener('submit', handleFormSubmit);
 editButton.addEventListener('click', openPopupName);

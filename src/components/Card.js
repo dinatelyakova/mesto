@@ -1,11 +1,11 @@
-import {openModal, imagePopup, bigImage, bigTitle} from './index.js';
 
-class Card{
-    constructor(data, elementSelector){
+export default class Card{
+    constructor(data,{handleCardClick}, elementSelector){
         this._name = data.name;
         this._link = data.link;
         this._elementSelector = elementSelector;
-        this._increaseImage = this._increaseImage.bind(this);
+        this.handleCardClick = handleCardClick;
+        
     }
     _getTemplate(){
         const elemTemplate = document
@@ -26,12 +26,8 @@ class Card{
 
         return this._view;  
     }
-    _increaseImage(){
-        bigImage.src = this._link;
-        bigTitle.textContent = this._name;
-        bigImage.alt =this._name;
-        openModal(imagePopup);
-    }
+   
+ 
     _setEventListeners(){
         this._view.querySelector('.element__delete').addEventListener('click', function(evt){
             evt.target.closest('.element').remove();
@@ -39,9 +35,11 @@ class Card{
         this._view.querySelector('.element__like').addEventListener('click', function (evt){
             evt.target.classList.toggle('element__like_active');
         });
-        this._view.querySelector('.element__image').addEventListener('click', this._increaseImage);
+        this._view.querySelector('.element__image').addEventListener('click',()=>{
+            this.handleCardClick(this._name, this._link)
+        });
     };
 
 };
 
-export default Card;
+ 

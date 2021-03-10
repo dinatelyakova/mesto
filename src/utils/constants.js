@@ -1,7 +1,3 @@
-
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-
 const editButton = document.querySelector('.profile__edit');
 const popups = document.querySelectorAll('.popup');
 const closeButton = document.querySelector('.popup__close');
@@ -19,7 +15,7 @@ const addButton = document.querySelector('.profile__add');
 const placePopup = document.querySelector('.popup_name_place');
 const placeCloseButton = document.querySelector('.popup__close_name_place');
 const placeLike = document.querySelector('element__like');
-const elementGrid = document.querySelector('.elements');
+const cardListSelector = document.querySelector('.elements');
 const imagePopup = document.querySelector('.popup_name_image');
 const imageCloseButton = document.querySelector('.popup__close_name_image');
 const bigImage = document.querySelector('.popup__image');
@@ -28,6 +24,7 @@ const formImageElement= document.querySelector('.popup__form-image');
 const title =  document.querySelector('.popup__text_type_title');
 const image = document.querySelector('.popup__text_type_link');
 const namePopup = document.querySelector('.popup_name_info');
+const elementCard = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
 
 const initialCards = [
     {
@@ -66,87 +63,5 @@ const validationObj = {
   errorClass: 'popup__text-error_active'
 };
 
-const formValidatorInfo = new FormValidator(validationObj, formInfoElement);
-formValidatorInfo.enableValidation();
-
-const formValidatorPlace = new FormValidator(validationObj, formImageElement);
-formValidatorPlace.enableValidation();
-
-
-
-
-// отображение темплейтов на странице
-initialCards.forEach(function(item){
-    const placeElement =  createCard(item);
-    elementGrid.prepend(placeElement);
-});
-
-
-
-function createCard(data){
-    const card = new Card(data, '.element-template');
-    const cardElement = card.render();
-    return cardElement;
-}
-
-// открытие попапов
- function openModal(popup){
-    popup.classList.add('popup_active');
-    document.addEventListener('keydown', closeByEscape);
- }
-//закрытие попапов
- function closeModal(popup){
-    popup.classList.remove('popup_active');
-    document.removeEventListener('keydown', closeByEscape);
- }
- function closeByEscape(evt) {
-    if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_active');
-      closeModal(openedPopup);
-    }
-  }
-  popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains('popup_active')) {
-            closeModal(popup);
-        }
-        if (evt.target.classList.contains('popup__close')) {
-            closeModal(popup);
-        }
-    })
-});
-function openPopupName(){
-    nameInput.textContent = nameProfile.value;
-    descriptionInput.textContent = descriptionProfile.value;
-    formValidatorInfo.resetValidation();
-    openModal(namePopup);
-};
-// отправка имени
-function handleFormSubmit (evt) {
-    evt.preventDefault();
-    nameProfile.textContent = nameInput.value;
-    descriptionProfile.textContent = descriptionInput.value;
-    closeModal(namePopup) 
-};
-
-// //отправка картинки
-function handleSubmit(evt){
-    evt.preventDefault();
-    const placeElement = createCard({ name:title.value, link:image.value});
-    elementGrid.prepend(placeElement);
-    title.value = '';
-    image.value = '';
-    closeModal(placePopup); 
-};
-
-addButton.addEventListener('click', () => {
-    formValidatorPlace.resetValidation()
-    openModal(placePopup)
-});
-
-formImageElement.addEventListener('submit', handleSubmit);
-formInfoElement.addEventListener('submit', handleFormSubmit);
-editButton.addEventListener('click', openPopupName);
-
-
-export {openModal, closeModal, imagePopup, bigImage, bigTitle};
+export { elementCard, imagePopup,  editButton, formInfoElement, nameInput, descriptionInput, descriptionProfile, nameProfile, addButton, placePopup,
+    cardListSelector,  bigImage, bigTitle, formImageElement, title, image, namePopup, initialCards,  validationObj, popups};

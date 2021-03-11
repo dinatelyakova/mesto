@@ -63,5 +63,5 @@ const validationObj = {
   errorClass: 'popup__text-error_active'
 };
 
-export { elementCard, imagePopup,  editButton, formInfoElement, nameInput, descriptionInput, descriptionProfile, nameProfile, addButton, placePopup,
+export { createButton, elementCard, imagePopup,  editButton, formInfoElement, nameInput, descriptionInput, descriptionProfile, nameProfile, addButton, placePopup,
     cardListSelector,  bigImage, bigTitle, formImageElement, title, image, namePopup, initialCards,  validationObj, popups};

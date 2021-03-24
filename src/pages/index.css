@@ -55,7 +55,7 @@
 @import url('../blocks/popup/__container/_type/popup__container_type_delete.css');
 @import url('../blocks/popup/__title/_name/popup__title_name_delete.css');
 @import url('../blocks/button/_type/button_type_delete.css');
-@import url('../blocks/button/_type/button_type_loading.css');
+
 @import url('../blocks/button/_type/button_type_saving.css');
 @import url('../blocks/profile/__photo-box/profile__photo-box.css');
 @import url('../blocks/profile/__avatar-change/profile__avatar-change.css');

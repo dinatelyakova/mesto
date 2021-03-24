@@ -24,10 +24,16 @@ export default class PopupWithForm extends Popup{
             this._formValues[input.name] = input.value);
     return this._formValues;
     };
+
+    handleSubmitDelete(handler) {
+        this._handleFormSubmit = handler;
+   
+    }
      
   close(){
     super.close();
     this._formElement.reset();
 };
+
  
 }

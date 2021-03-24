@@ -20,6 +20,23 @@ class FormValidator{
       this._buttonElement.disabled = true;
     }
 
+    loadingData(isLoading){
+      if (isLoading){
+        this._buttonElement.innerHTML = 'Сохранение...';
+      } 
+      else{
+        this._buttonElement.innerHTML = 'Сохранить';
+      }
+    }
+    loadingDataPlace(isLoading){
+      if (isLoading){
+        this._buttonElement.innerHTML = 'Сохранение...';
+    }
+    else{
+      this._buttonElement.innerHTML = 'Создать';
+    }
+  }
+
     resetValidation(){
         this._inputList.forEach((inputElement) => {
           this._hideInputError(inputElement)

@@ -25,6 +25,11 @@ const title =  document.querySelector('.popup__text_type_title');
 const image = document.querySelector('.popup__text_type_link');
 const namePopup = document.querySelector('.popup_name_info');
 const elementCard = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
+const avatar = document.querySelector('.profile__photo-box');
+const avatarFormElement = document.querySelector('.popup__form-avatar');
+const avatarInput = document.querySelector('.popup__text_type_avatar');
+const deleteInPopupButton = document.querySelector('.button_type_delete');
+const formDeletePopup = document.querySelector('.popup__form-delete')
 
 const initialCards = [
     {
@@ -63,5 +68,5 @@ const validationObj = {
   errorClass: 'popup__text-error_active'
 };
 
-export { createButton, elementCard, imagePopup,  editButton, formInfoElement, nameInput, descriptionInput, descriptionProfile, nameProfile, addButton, placePopup,
+export { formDeletePopup, deleteInPopupButton, avatarInput, avatarFormElement, avatar, createButton, elementCard, imagePopup,  editButton, formInfoElement, nameInput, descriptionInput, descriptionProfile, nameProfile, addButton, placePopup,
     cardListSelector,  bigImage, bigTitle, formImageElement, title, image, namePopup, initialCards,  validationObj, popups};

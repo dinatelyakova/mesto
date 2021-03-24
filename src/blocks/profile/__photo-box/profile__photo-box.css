@@ -1,0 +1,19 @@
+.profile__photo-box{
+    
+    position: relative;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    z-index: 2;
+}
+.profile__photo-box:hover .profile__avatar-change{
+    display: block;
+    
+}
+@media screen and (max-width:425px){
+    .profile__photo-box{
+        margin-left:81px;
+        margin-right: 81px;
+        justify-self: center;
+    }
+}

@@ -1,0 +1,9 @@
+.profile__avatar-change{
+    position: absolute;
+    width:26px;
+    height: 26px;
+    top:47px;
+    right:47px;
+    display: none;
+    z-index: 1;
+}

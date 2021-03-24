@@ -1,3 +1,9 @@
+
+
+.popup__text-error:first-of-type{
+    top: 35px;
+}
+
 .popup__text-error{
     opacity: 0;
     color:#FF0000;
@@ -7,9 +13,7 @@
     position:absolute;
     font-size: 12px;
     left:0;
-    top: 35px;
+    top: 96px;
     transition: 0.3s;
 }
-.popup__text-error:last-of-type{
-    top:96px;
-}
+
